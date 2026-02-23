@@ -99,7 +99,7 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Theme Toggle REMOVED to prevent hydration mismatch */}
+
         </nav>
 
         {/* Hero */}
