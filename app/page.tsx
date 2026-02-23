@@ -155,12 +155,17 @@ export default function Home() {
         </section>
 
         {/* Projects */}
-        <section id="projects" className="py-20 fade-in" style={{ animationDelay: "0.2s" }}>
+        <section
+          id="projects"
+          className="py-20 fade-in scroll-mt-24"
+          style={{ animationDelay: "0.2s" }}
+        >
           <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">Projects</h2>
 
-          <div className="flex gap-10">
+          {/* MOBILE: stacked layout | DESKTOP: sidebar + grid */}
+          <div className="flex flex-col sm:flex-row gap-6 sm:gap-10">
             {/* Sidebar Filter (Desktop) */}
-            <aside className="hidden sm:block w-40">
+            <aside className="hidden sm:block w-40 shrink-0">
               <h3 className="font-semibold mb-4">Filter by Tech</h3>
               <ul className="space-y-2 text-sm">
                 {["All", "Java & Spring Boot", "Angular", "Python"].map((cat) => (
@@ -176,57 +181,60 @@ export default function Home() {
               </ul>
             </aside>
 
-            {/* Mobile Filter */}
-            <div className="sm:hidden mb-6 w-full">
-              <button
-                onClick={() => setMobileFilterOpen((v) => !v)}
-                className="w-full px-4 py-2 border border-foreground/30 rounded-md text-sm"
-              >
-                Filter: {filter}
-              </button>
-
-              {mobileFilterOpen && (
-                <ul className="mt-3 space-y-2 text-sm border p-4 rounded-md">
-                  {["All", "Java & Spring Boot", "Angular", "Python"].map((cat) => (
-                    <li
-                      key={cat}
-                      onClick={() => {
-                        setFilter(cat);
-                        setMobileFilterOpen(false);
-                      }}
-                      className={`cursor-pointer hover:opacity-70 ${filter === cat ? "font-bold underline" : ""
-                        }`}
-                    >
-                      {cat}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-
-            {/* Project Cards */}
-            <div className="grid gap-8 sm:grid-cols-2 flex-1">
-              {filteredProjects.map((p, i) => (
-                <div
-                  key={i}
-                  className="border border-foreground/20 rounded-lg p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            {/* Right side: mobile filter + cards */}
+            <div className="flex-1">
+              {/* Mobile Filter (full width on top) */}
+              <div className="sm:hidden mb-6 w-full">
+                <button
+                  onClick={() => setMobileFilterOpen((v) => !v)}
+                  className="w-full px-4 py-2 border border-foreground/30 rounded-md text-sm"
                 >
-                  <h3 className="text-xl font-semibold mb-2">{p.title}</h3>
-                  <p className="text-sm opacity-80 mb-4">{p.description}</p>
-                  <p className="text-sm font-medium mb-4">Tech: {p.tech}</p>
+                  Filter: {filter}
+                </button>
 
-                  <div className="flex gap-4">
-                    <a
-                      href={p.github}
-                      className="text-sm underline hover:opacity-70"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      GitHub
-                    </a>
+                {mobileFilterOpen && (
+                  <ul className="mt-3 space-y-2 text-sm border border-foreground/20 p-4 rounded-md">
+                    {["All", "Java & Spring Boot", "Angular", "Python"].map((cat) => (
+                      <li
+                        key={cat}
+                        onClick={() => {
+                          setFilter(cat);
+                          setMobileFilterOpen(false);
+                        }}
+                        className={`cursor-pointer hover:opacity-70 ${filter === cat ? "font-bold underline" : ""
+                          }`}
+                      >
+                        {cat}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              {/* Project Cards */}
+              <div className="grid gap-5 sm:gap-8 sm:grid-cols-2">
+                {filteredProjects.map((p, i) => (
+                  <div
+                    key={i}
+                    className="border border-foreground/20 rounded-lg p-4 sm:p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <h3 className="text-lg sm:text-xl font-semibold mb-2">{p.title}</h3>
+                    <p className="text-sm opacity-80 mb-4">{p.description}</p>
+                    <p className="text-sm font-medium mb-4">Tech: {p.tech}</p>
+
+                    <div className="flex gap-4">
+                      <a
+                        href={p.github}
+                        className="text-sm underline hover:opacity-70"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        GitHub
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </section>
