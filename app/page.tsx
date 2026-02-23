@@ -24,7 +24,6 @@ export default function Home() {
   const [filter, setFilter] = useState("All");
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-  // PROJECT FILTERING LOGIC
   const projects: Project[] = [
     {
       title: "Student Performance Analytics ETL Platform",
@@ -98,8 +97,6 @@ export default function Home() {
               Contact
             </a>
           </div>
-
-
         </nav>
 
         {/* Hero */}
@@ -386,7 +383,7 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="py-10 text-center text-sm opacity-60 border-t border-foreground/10 mt-20">
-          © {new Date().getFullYear()} Sudarshan — Built with Next.js & Tailwind CSS
+          © Sudarshan — Built with Next.js & Tailwind CSS
         </footer>
       </div>
     </main>
