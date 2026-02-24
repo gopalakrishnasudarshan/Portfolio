@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { FaJava, FaPython, FaAws, FaDocker, FaGitAlt, FaFilePdf } from "react-icons/fa";
+import {
+  FaJava,
+  FaPython,
+  FaAws,
+  FaDocker,
+  FaGitAlt,
+  FaFilePdf,
+} from "react-icons/fa";
 import {
   SiSpringboot,
   SiAngular,
@@ -22,6 +29,7 @@ type Project = {
 
 export default function Home() {
   const [filter, setFilter] = useState("All");
+  // kept for safety (not used in mobile anymore, but leaving it avoids accidental breaking)
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   const projects: Project[] = [
@@ -71,6 +79,8 @@ export default function Home() {
     },
   ];
 
+  const categories = ["All", "Java & Spring Boot", "Angular", "Python"];
+
   const filteredProjects =
     filter === "All"
       ? projects
@@ -106,11 +116,13 @@ export default function Home() {
           style={{ animationDelay: "0.1s" }}
         >
           <div className="flex-1 text-center lg:text-left">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4">Hi, I’m Sudarshan</h2>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              Hi, I’m Sudarshan
+            </h2>
 
             <p className="text-lg sm:text-xl max-w-xl mb-6 opacity-90">
-              A full-stack developer specializing in Java, Spring Boot, Angular, and modern web
-              technologies.
+              A full-stack developer specializing in Java, Spring Boot, Angular,
+              and modern web technologies.
             </p>
           </div>
 
@@ -125,31 +137,35 @@ export default function Home() {
 
         {/* About */}
         <section id="about" className="py-20 fade-in" style={{ animationDelay: "0.3s" }}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">About Me</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
+            About Me
+          </h2>
 
           <div className="max-w-3xl mx-auto text-center space-y-4 text-lg opacity-90">
             <p>
-              I’m a software developer with experience in Java, Spring Boot, SQL, and Angular.
-              While I focus mainly on backend engineering, I also build full-stack applications
-              when needed.
+              I’m a software developer with experience in Java, Spring Boot, SQL,
+              and Angular. While I focus mainly on backend engineering, I also
+              build full-stack applications when needed.
             </p>
 
             <p>
-              I previously worked as a Software Engineer at Mphasis for 3 years and am currently
-              pursuing a Master’s in Computer Science for Digital Media at Bauhaus-Universität
-              Weimar.
+              I previously worked as a Software Engineer at Mphasis for 3 years
+              and am currently pursuing a Master’s in Computer Science for
+              Digital Media at Bauhaus-Universität Weimar.
             </p>
 
             <p>
               I have a growing interest in{" "}
-              <span className="font-semibold">Computer Vision and Image Analysis</span>, especially
-              in understanding and processing visual data.
+              <span className="font-semibold">
+                Computer Vision and Image Analysis
+              </span>
+              , especially in understanding and processing visual data.
             </p>
 
             <p>
-              I’m actively looking for working student, internship, or thesis opportunities in
-              backend, full-stack development, or computer vision, and I’m available to join
-              immediately.
+              I’m actively looking for working student, internship, or thesis
+              opportunities in backend, full-stack development, or computer
+              vision, and I’m available to join immediately.
             </p>
           </div>
         </section>
@@ -160,7 +176,9 @@ export default function Home() {
           className="py-20 fade-in scroll-mt-24"
           style={{ animationDelay: "0.2s" }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">Projects</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
+            Projects
+          </h2>
 
           {/* MOBILE: stacked layout | DESKTOP: sidebar + grid */}
           <div className="flex flex-col sm:flex-row gap-6 sm:gap-10">
@@ -168,7 +186,7 @@ export default function Home() {
             <aside className="hidden sm:block w-40 shrink-0">
               <h3 className="font-semibold mb-4">Filter by Tech</h3>
               <ul className="space-y-2 text-sm">
-                {["All", "Java & Spring Boot", "Angular", "Python"].map((cat) => (
+                {categories.map((cat) => (
                   <li
                     key={cat}
                     onClick={() => setFilter(cat)}
@@ -183,32 +201,27 @@ export default function Home() {
 
             {/* Right side: mobile filter + cards */}
             <div className="flex-1">
-              {/* Mobile Filter (full width on top) */}
+              {/* Mobile Filter (horizontal chips) */}
               <div className="sm:hidden mb-6 w-full">
-                <button
-                  onClick={() => setMobileFilterOpen((v) => !v)}
-                  className="w-full px-4 py-2 border border-foreground/30 rounded-md text-sm"
-                >
-                  Filter: {filter}
-                </button>
-
-                {mobileFilterOpen && (
-                  <ul className="mt-3 space-y-2 text-sm border border-foreground/20 p-4 rounded-md">
-                    {["All", "Java & Spring Boot", "Angular", "Python"].map((cat) => (
-                      <li
+                <div className="flex gap-2 overflow-x-auto whitespace-nowrap pb-2 -mx-1 px-1">
+                  {categories.map((cat) => {
+                    const active = filter === cat;
+                    return (
+                      <button
                         key={cat}
-                        onClick={() => {
-                          setFilter(cat);
-                          setMobileFilterOpen(false);
-                        }}
-                        className={`cursor-pointer hover:opacity-70 ${filter === cat ? "font-bold underline" : ""
+                        type="button"
+                        onClick={() => setFilter(cat)}
+                        className={`shrink-0 px-3 py-2 rounded-md text-sm border transition-all ${active
+                            ? "border-foreground/60 font-semibold"
+                            : "border-foreground/25 hover:border-foreground/40"
                           }`}
+                        aria-pressed={active}
                       >
                         {cat}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Project Cards */}
@@ -218,7 +231,9 @@ export default function Home() {
                     key={i}
                     className="border border-foreground/20 rounded-lg p-4 sm:p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                   >
-                    <h3 className="text-lg sm:text-xl font-semibold mb-2">{p.title}</h3>
+                    <h3 className="text-lg sm:text-xl font-semibold mb-2">
+                      {p.title}
+                    </h3>
                     <p className="text-sm opacity-80 mb-4">{p.description}</p>
                     <p className="text-sm font-medium mb-4">Tech: {p.tech}</p>
 
@@ -241,7 +256,9 @@ export default function Home() {
 
         {/* Skills */}
         <section id="skills" className="py-20 fade-in" style={{ animationDelay: "0.4s" }}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">Skills</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
+            Skills
+          </h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center text-lg opacity-90">
             {/* Languages */}
@@ -322,14 +339,18 @@ export default function Home() {
             {/* Soft Skills */}
             <div>
               <h3 className="font-semibold mb-3">Soft Skills</h3>
-              <p className="opacity-80">Problem-solving, Communication, Teamwork</p>
+              <p className="opacity-80">
+                Problem-solving, Communication, Teamwork
+              </p>
             </div>
           </div>
         </section>
 
         {/* Resume */}
         <section id="resume" className="py-20 fade-in" style={{ animationDelay: "0.35s" }}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">Resume</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
+            Resume
+          </h2>
 
           <div className="flex flex-col sm:flex-row justify-center gap-6 text-center">
             <a
@@ -352,12 +373,14 @@ export default function Home() {
 
         {/* Contact */}
         <section id="contact" className="py-20 fade-in" style={{ animationDelay: "0.5s" }}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">Contact</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
+            Contact
+          </h2>
 
           <div className="max-w-xl mx-auto text-center space-y-6">
             <p className="text-lg opacity-90">
-              Feel free to reach out if you’d like to collaborate, discuss an opportunity, or
-              just say hello.
+              Feel free to reach out if you’d like to collaborate, discuss an
+              opportunity, or just say hello.
             </p>
 
             <div className="space-y-4">
