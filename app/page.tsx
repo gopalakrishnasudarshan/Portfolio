@@ -8,6 +8,7 @@ import {
   FaDocker,
   FaGitAlt,
   FaFilePdf,
+  FaJenkins,
 } from "react-icons/fa";
 import {
   SiSpringboot,
@@ -17,7 +18,17 @@ import {
   SiTypescript,
   SiMysql,
   SiPostgresql,
+  SiMongodb,
+  SiFastapi,
+  SiIntellijidea,
+  SiPycharm,
+  SiPostman,
+  SiSwagger,
+  SiJira,
+  SiConfluence,
+  SiJunit5,
 } from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
 
 type Project = {
   title: string;
@@ -29,10 +40,27 @@ type Project = {
 
 export default function Home() {
   const [filter, setFilter] = useState("All");
-  // kept for safety (not used in mobile anymore, but leaving it avoids accidental breaking)
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   const projects: Project[] = [
+    {
+      title: "Real-Time Payment & Fraud Detection Platform",
+      description:
+        "A production-grade, event-driven microservices platform for real-time payment processing with integrated fraud detection and ML-based risk scoring using rule-based checks and a scikit-learn model.",
+      tech: "Java 17, Spring Boot, Spring Cloud, Apache Kafka, RabbitMQ, PostgreSQL, Python, FastAPI, Docker",
+      tags: ["JavaSpring", "Python"],
+      github:
+        "https://github.com/gopalakrishnasudarshan/Payment-Platform",
+    },
+    {
+      title: "Udemy Notes Generator",
+      description:
+        "A Spring Boot application that transforms lecture transcripts into structured study notes using AI, with a built-in conversational chat feature to ask follow-up questions about the generated notes.",
+      tech: "Java 17, Spring Boot, Spring AI, LangChain4j, Groq API (LLaMA 3.1), HTML, CSS, JavaScript, Gradle",
+      tags: ["JavaSpring"],
+      github:
+        "https://github.com/gopalakrishnasudarshan/Udemy-Notes-Generator",
+    },
     {
       title: "Student Performance Analytics ETL Platform",
       description:
@@ -68,15 +96,6 @@ export default function Home() {
       github:
         "https://github.com/gopalakrishnasudarshan/Differentiable-inverse-rendering-Material-estimation",
     },
-    {
-      title: "Merkle Quad-Tree Based Image Change Detection",
-      description:
-        "An image change-detection system that partitions aligned RGB images into quadtree patches, computes perceptual hashes, builds a Merkle Tree, and localizes changes through leaf-level hash comparisons with visualized outputs.",
-      tech: "Python, NumPy, Pillow, ImageHash, Merkle Trees",
-      tags: ["Python"],
-      github:
-        "https://github.com/gopalakrishnasudarshan/Change-Detection-Using-Merkle-Trees",
-    },
   ];
 
   const categories = ["All", "Java & Spring Boot", "Angular", "Python"];
@@ -88,24 +107,76 @@ export default function Home() {
         ? projects.filter((p) => p.tags.includes("JavaSpring"))
         : projects.filter((p) => p.tags.includes(filter));
 
+  const skillSections = [
+    {
+      title: "Languages",
+      items: [
+        { label: "Java", icon: <FaJava /> },
+        { label: "Python", icon: <FaPython /> },
+        { label: "TypeScript", icon: <SiTypescript /> },
+        { label: "JavaScript", icon: <SiJavascript /> },
+        { label: "SQL", icon: null },
+      ],
+    },
+    {
+      title: "Frameworks & Libraries",
+      items: [
+        { label: "Spring Boot", icon: <SiSpringboot /> },
+        { label: "Angular", icon: <SiAngular /> },
+        { label: "Next.js", icon: <SiNextdotjs /> },
+        { label: "FastAPI", icon: <SiFastapi /> },
+      ],
+    },
+    {
+      title: "Databases",
+      items: [
+        { label: "PostgreSQL", icon: <SiPostgresql /> },
+        { label: "MySQL", icon: <SiMysql /> },
+        { label: "MongoDB", icon: <SiMongodb /> },
+      ],
+    },
+    {
+      title: "Cloud & DevOps",
+      items: [
+        { label: "AWS", icon: <FaAws /> },
+        { label: "Docker", icon: <FaDocker /> },
+        { label: "Git", icon: <FaGitAlt /> },
+        { label: "Jenkins", icon: <FaJenkins /> },
+      ],
+    },
+    {
+      title: "Tools",
+      items: [
+        { label: "IntelliJ IDEA", icon: <SiIntellijidea /> },
+        { label: "PyCharm", icon: <SiPycharm /> },
+        { label: "VS Code", icon: <VscVscode /> },
+        { label: "Postman", icon: <SiPostman /> },
+        { label: "Swagger", icon: <SiSwagger /> },
+        { label: "JIRA", icon: <SiJira /> },
+        { label: "Confluence", icon: <SiConfluence /> },
+        { label: "ServiceNow", icon: null },
+      ],
+    },
+    {
+      title: "Testing",
+      items: [
+        { label: "JUnit", icon: <SiJunit5 /> },
+        { label: "Mockito", icon: null },
+      ],
+    },
+  ];
+
   return (
     <main className="min-h-screen flex flex-col bg-background text-foreground">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+
         {/* Navbar */}
         <nav className="flex items-center py-6 sticky top-0 bg-background/80 backdrop-blur-md z-50">
           <div className="hidden sm:flex gap-6 text-sm ml-auto">
-            <a href="#about" className="hover:opacity-70">
-              About
-            </a>
-            <a href="#projects" className="hover:opacity-70">
-              Projects
-            </a>
-            <a href="#skills" className="hover:opacity-70">
-              Skills
-            </a>
-            <a href="#contact" className="hover:opacity-70">
-              Contact
-            </a>
+            <a href="#about" className="hover:opacity-70">About</a>
+            <a href="#projects" className="hover:opacity-70">Projects</a>
+            <a href="#skills" className="hover:opacity-70">Skills</a>
+            <a href="#contact" className="hover:opacity-70">Contact</a>
           </div>
         </nav>
 
@@ -117,18 +188,16 @@ export default function Home() {
         >
           <div className="flex-1 text-center lg:text-left">
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-              Hi, I’m Sudarshan
+              Hi, I am Sudarshan
             </h2>
-
             <p className="text-lg sm:text-xl max-w-xl mb-6 opacity-90">
-              A full-stack developer specializing in Java, Spring Boot, Angular,
+              A full-stack developer specializing in Java, Spring Boot, Angular
               and modern web technologies.
             </p>
           </div>
-
           <div className="flex-1 flex justify-center">
             <img
-              src="/sudarshan.png"
+              src="/sudarshan.JPG"
               alt="Sudarshan"
               className="w-48 h-48 sm:w-56 sm:h-56 rounded-full object-cover border border-foreground/20 shadow-xl shadow-foreground/10"
             />
@@ -140,32 +209,13 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
             About Me
           </h2>
-
-          <div className="max-w-3xl mx-auto text-center space-y-4 text-lg opacity-90">
+          <div className="max-w-3xl mx-auto text-center text-lg opacity-90">
             <p>
-              I’m a software developer with experience in Java, Spring Boot, SQL,
-              and Angular. While I focus mainly on backend engineering, I also
-              build full-stack applications when needed.
-            </p>
-
-            <p>
-              I previously worked as a Software Engineer at Mphasis for 3 years
-              and am currently pursuing a Master’s in Computer Science for
-              Digital Media at Bauhaus-Universität Weimar.
-            </p>
-
-            <p>
-              I have a growing interest in{" "}
-              <span className="font-semibold">
-                Computer Vision and Image Analysis
-              </span>
-              , especially in understanding and processing visual data.
-            </p>
-
-            <p>
-              I’m actively looking for working student, internship, or thesis
-              opportunities in backend, full-stack development, or computer
-              vision, and I’m available to join immediately.
+              A backend-focused software developer with 3 years of experience at Mphasis,
+              working with Java, Spring Boot, and Angular. Currently pursuing a Masters
+              in Computer Science for Digital Media at Bauhaus-Universität Weimar, with a
+              growing interest in{" "}
+              <span className="font-semibold">Computer Vision and Image Analysis</span>.
             </p>
           </div>
         </section>
@@ -179,10 +229,7 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
             Projects
           </h2>
-
-          {/* MOBILE: stacked layout | DESKTOP: sidebar + grid */}
           <div className="flex flex-col sm:flex-row gap-6 sm:gap-10">
-            {/* Sidebar Filter (Desktop) */}
             <aside className="hidden sm:block w-40 shrink-0">
               <h3 className="font-semibold mb-4">Filter by Tech</h3>
               <ul className="space-y-2 text-sm">
@@ -190,18 +237,14 @@ export default function Home() {
                   <li
                     key={cat}
                     onClick={() => setFilter(cat)}
-                    className={`cursor-pointer hover:opacity-70 ${filter === cat ? "font-bold underline" : ""
-                      }`}
+                    className={`cursor-pointer hover:opacity-70 ${filter === cat ? "font-bold underline" : ""}`}
                   >
                     {cat}
                   </li>
                 ))}
               </ul>
             </aside>
-
-            {/* Right side: mobile filter + cards */}
             <div className="flex-1">
-              {/* Mobile Filter (horizontal chips) */}
               <div className="sm:hidden mb-6 w-full">
                 <div className="flex gap-2 overflow-x-auto whitespace-nowrap pb-2 -mx-1 px-1">
                   {categories.map((cat) => {
@@ -212,8 +255,8 @@ export default function Home() {
                         type="button"
                         onClick={() => setFilter(cat)}
                         className={`shrink-0 px-3 py-2 rounded-md text-sm border transition-all ${active
-                            ? "border-foreground/60 font-semibold"
-                            : "border-foreground/25 hover:border-foreground/40"
+                          ? "border-foreground/60 font-semibold"
+                          : "border-foreground/25 hover:border-foreground/40"
                           }`}
                         aria-pressed={active}
                       >
@@ -223,20 +266,15 @@ export default function Home() {
                   })}
                 </div>
               </div>
-
-              {/* Project Cards */}
               <div className="grid gap-5 sm:gap-8 sm:grid-cols-2">
                 {filteredProjects.map((p, i) => (
                   <div
                     key={i}
                     className="border border-foreground/20 rounded-lg p-4 sm:p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                   >
-                    <h3 className="text-lg sm:text-xl font-semibold mb-2">
-                      {p.title}
-                    </h3>
+                    <h3 className="text-lg sm:text-xl font-semibold mb-2">{p.title}</h3>
                     <p className="text-sm opacity-80 mb-4">{p.description}</p>
                     <p className="text-sm font-medium mb-4">Tech: {p.tech}</p>
-
                     <div className="flex gap-4">
                       <a
                         href={p.github}
@@ -259,90 +297,28 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
             Skills
           </h2>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center text-lg opacity-90">
-            {/* Languages */}
-            <div>
-              <h3 className="font-semibold mb-3">Languages</h3>
-              <div className="flex flex-col gap-2 items-center">
-                <span className="flex items-center gap-2">
-                  <FaJava /> Java
-                </span>
-                <span className="flex items-center gap-2">
-                  <SiJavascript /> JavaScript
-                </span>
-                <span className="flex items-center gap-2">
-                  <SiTypescript /> TypeScript
-                </span>
-                <span className="flex items-center gap-2">
-                  <FaPython /> Python
-                </span>
-                <span className="flex items-center gap-2">SQL</span>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {skillSections.map((section) => (
+              <div
+                key={section.title}
+                className="border border-foreground/15 rounded-xl p-5"
+              >
+                <h3 className="font-semibold uppercase tracking-wide text-xs opacity-50 mb-4">
+                  {section.title}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {section.items.map((item) => (
+                    <span
+                      key={item.label}
+                      className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-md border border-foreground/15 hover:border-foreground/40 transition-colors"
+                    >
+                      {item.icon && <span className="text-base">{item.icon}</span>}
+                      {item.label}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-
-            {/* Frameworks */}
-            <div>
-              <h3 className="font-semibold mb-3">Frameworks</h3>
-              <div className="flex flex-col gap-2 items-center">
-                <span className="flex items-center gap-2">
-                  <SiSpringboot /> Spring Boot
-                </span>
-                <span className="flex items-center gap-2">
-                  <SiAngular /> Angular
-                </span>
-                <span className="flex items-center gap-2">
-                  <SiNextdotjs /> Next.js
-                </span>
-              </div>
-            </div>
-
-            {/* Cloud & Tools */}
-            <div>
-              <h3 className="font-semibold mb-3">Cloud & Tools</h3>
-              <div className="flex flex-col gap-2 items-center">
-                <span className="flex items-center gap-2">
-                  <FaAws /> AWS
-                </span>
-                <span className="flex items-center gap-2">
-                  <FaDocker /> Docker
-                </span>
-                <span className="flex items-center gap-2">
-                  <FaGitAlt /> Git
-                </span>
-                <span className="flex items-center gap-2">REST APIs</span>
-              </div>
-            </div>
-
-            {/* Databases */}
-            <div>
-              <h3 className="font-semibold mb-3">Databases</h3>
-              <div className="flex flex-col gap-2 items-center">
-                <span className="flex items-center gap-2">
-                  <SiMysql /> MySQL
-                </span>
-                <span className="flex items-center gap-2">
-                  <SiPostgresql /> PostgreSQL
-                </span>
-              </div>
-            </div>
-
-            {/* Testing */}
-            <div>
-              <h3 className="font-semibold mb-3">Testing</h3>
-              <div className="flex flex-col gap-2 items-center">
-                <span className="flex items-center gap-2">JUnit</span>
-                <span className="flex items-center gap-2">Postman</span>
-              </div>
-            </div>
-
-            {/* Soft Skills */}
-            <div>
-              <h3 className="font-semibold mb-3">Soft Skills</h3>
-              <p className="opacity-80">
-                Problem-solving, Communication, Teamwork
-              </p>
-            </div>
+            ))}
           </div>
         </section>
 
@@ -351,7 +327,6 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
             Resume
           </h2>
-
           <div className="flex flex-col sm:flex-row justify-center gap-6 text-center">
             <a
               href="/resume-en.pdf"
@@ -360,7 +335,6 @@ export default function Home() {
             >
               <FaFilePdf /> English
             </a>
-
             <a
               href="/resume-de.pdf"
               download
@@ -376,13 +350,11 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center">
             Contact
           </h2>
-
           <div className="max-w-xl mx-auto text-center space-y-6">
             <p className="text-lg opacity-90">
-              Feel free to reach out if you’d like to collaborate, discuss an
+              Feel free to reach out if you would like to collaborate, discuss an
               opportunity, or just say hello.
             </p>
-
             <div className="space-y-4">
               <a
                 href="mailto:sudarshangopalakrishna@gmail.com"
@@ -390,7 +362,6 @@ export default function Home() {
               >
                 sudarshangopalakrishna@gmail.com
               </a>
-
               <a
                 href="https://www.linkedin.com/in/sudarshan-gopalakrishna/"
                 target="_blank"
@@ -399,7 +370,6 @@ export default function Home() {
               >
                 LinkedIn
               </a>
-
               <a
                 href="https://github.com/gopalakrishnasudarshan/"
                 target="_blank"
@@ -416,6 +386,7 @@ export default function Home() {
         <footer className="py-10 text-center text-sm opacity-60 border-t border-foreground/10 mt-20">
           © Sudarshan — Built with Next.js & Tailwind CSS
         </footer>
+
       </div>
     </main>
   );
